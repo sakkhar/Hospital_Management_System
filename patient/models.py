@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from accounts.models import Account
+#from doctor.models import Hospital
+
+
 class Admission(models.Model):
     ADMISSIONREASON = (
         ('Pneumonia', "Pneumonia"),
@@ -57,7 +61,7 @@ class Admission(models.Model):
                 return item[1]
         return "None"
 
-    #account = models.ForeignKey(Account, related_name="admissions_account")
+    account = models.ForeignKey(Account, related_name="admissions_account")
     user =models.ManyToManyField(User)
     first_name    = models.CharField(max_length=100, null=True, blank=True)
     last_name   = models.CharField(max_length=100, null=True, blank=True)
@@ -70,7 +74,7 @@ class Admission(models.Model):
     admission = models.DateTimeField(auto_now_add=True)
     discharged_timestamp = models.DateTimeField(null=True, blank=True)
     reason = models.CharField(max_length=20, choices=ADMISSIONREASON)
-    description = models.TextField(blank=True, max_length=1000, help_text='This is parient details')
+    #description = models.TextField(blank=True, max_length=1000, help_text='This is parient details')
     #hospital = models.ForeignKey(Hospital)
     active = models.BooleanField(default=True)
 
@@ -79,22 +83,22 @@ class Admission(models.Model):
         return self.first_name + " " + self.last_name
 
 class Appointment(models.Model):
-    #doctor = models.ForeignKey(Account, related_name="appointments_doctor")
-    #patient = models.ForeignKey(Account, related_name="appointments_patient")
-    description = models.CharField(max_length=200)
+   # doctor = models.ForeignKey(Account, related_name="appointments_doctor")
+   # patient = models.ForeignKey(Account, related_name="appointments_patient")
+    #description = models.CharField(max_length=200)
     status = models.CharField(max_length=50, default="Active")
-   # hospital = models.ForeignKey(Hospital)
+    #hospital = models.ForeignKey(Hospital)
     startTime = models.DateTimeField()
-    endTime = models.DateTimeField()
+    #endTime = models.DateTimeField()
 
     def get_populated_fields(self):
         """
         This is used by the form to collect the data.
         """
         fields = {
-            'description': self.description,
+            #'description': self.description,
             'startTime': self.startTime,
-            'endTime': self.endTime,
+            #'endTime': self.endTime,
         }
         return fields
 
@@ -102,7 +106,7 @@ class MedicalTest(models.Model):
     name = models.CharField(max_length=50)
     date = models.DateField()
     #hospital = models.ForeignKey(Hospital)
-    description = models.CharField(max_length=200)
+    #description = models.CharField(max_length=200)
     #doctor = models.ForeignKey(Account, related_name="medicaltests_doctor")
     #patient = models.ForeignKey(Account, related_name="medicaltests_patient")
     private = models.BooleanField(default=True)
@@ -121,7 +125,7 @@ class MedicalTest(models.Model):
             'name': self.name,
             'date': self.date,
             #'hospital': self.hospital,
-            'description': self.description,
+            #'description': self.description,
             #'doctor': self.doctor,
             #'patient': self.patient,
             'private': self.private,
@@ -131,19 +135,5 @@ class MedicalTest(models.Model):
             'image3': self.image3,
             'image4': self.image4,
             'image5': self.image5,
-        }
-        return fields
-
-class Statistics(models.Model):
-    startDate = models.DateField()
-    endDate = models.DateField()
-
-    def get_populated_fields(self):
-        """
-        This is used by the form to collect the data.
-        """
-        fields = {
-            'startDate': self.startDate,
-            'endDate': self.endDate,
         }
         return fields

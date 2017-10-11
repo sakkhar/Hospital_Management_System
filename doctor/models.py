@@ -74,3 +74,32 @@ class DoctorProfile(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+
+class Hospital(models.Model):
+    pass
+
+
+class Nurse(models.Model):
+    first_Name = models.CharField(max_length=50, default='')
+    last_Name = models.CharField(max_length=50, default='')
+    user_name = models.CharField(max_length=30, default='')
+    workplace = models.ForeignKey(Hospital, null=True)
+
+    def __str__(self):
+        return self.first_Name + " " + self.last_Name
+
+    def getWorkplace(self, nurse):
+        return nurse.workplace
+
+class Administrator(models.Model):
+    first_Name = models.CharField(max_length=50, default='')
+    last_Name = models.CharField(max_length=50, default='')
+    user_name = models.CharField(max_length=30, default='')
+    workplace = models.ForeignKey(Hospital)
+
+    def __str__(self):
+        return self.first_Name + " " + self.last_Name
+
+    def getWorkplace(self, admin):
+        return admin.workplace

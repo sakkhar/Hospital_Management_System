@@ -1,6 +1,6 @@
-from cProfile import Profile
+#from cProfile import Profile
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -49,8 +49,8 @@ class Account(models.Model):
         return 0
 
     role = models.IntegerField(default=0, choices=ACCOUNT_TYPES)
-    profile = models.OneToOneField(Profile)
-    user = models.OneToOneField(User)
+    #profile = models.OneToOneField(Profile)
+    #user = models.OneToOneField(User)
 
     def __str__(self):
         if self.role == 30:
