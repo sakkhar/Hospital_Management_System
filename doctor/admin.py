@@ -6,10 +6,10 @@ from django.contrib import admin
    # search_fields = ('first_name', 'last_name', 'email')
 
 # Register your models here.
-from doctor.models import DoctorProfile, Nurse, Administrator
+from doctor.models import DoctorProfile, Administrator
 
 admin.site.register(DoctorProfile)
-admin.site.register(Nurse)
+#admin.site.register(Nurse)
 admin.site.register(Administrator)
 
 

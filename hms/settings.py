@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'doctor.apps.DoctorConfig',
     'patient',
     'accounts',
+    'employee',
+    'monitor_hospital',
+
 
 ]
 
